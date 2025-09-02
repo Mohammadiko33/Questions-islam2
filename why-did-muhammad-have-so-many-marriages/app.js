@@ -408,6 +408,11 @@ function showSlide(index) {
 
   // وضعیت دکمه‌ها
   prevBtn.disabled = index === 0;
+  if (index === slides.length - 1) {
+    nextBtn.disabled = true;
+    nextBtn.innerText = "رسیدیم به آخری"; // می‌تونی متن رو هم تغییر بدی
+    return;
+  }
   nextBtn.disabled = true;
 
   let remaining =
