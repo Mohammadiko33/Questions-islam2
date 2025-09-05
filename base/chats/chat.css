@@ -1,120 +1,163 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 @font-face {
-    font-family: 'Shabnam';
-    src: url('./public/Shabnam.woff2');
+  font-family: "Shabnam";
+  src: url("./public/Shabnam.woff2");
 }
 
 body {
-    font-family: 'Shabnam', sans-serif;
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    background: linear-gradient(#ffffff2f , #ffffff5b) , url('./public/chatbg.jpg') no-repeat center center fixed;
-    background-size: cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow-x: hidden;
+  font-family: "Shabnam", sans-serif;
+  margin: 0;
+  padding: 0;
+  width: 100vw; /* مطمئن میشه عرض کل صفحه باشه */
+  height: 100vh;
+  overflow-x: hidden; /* جلوگیری از اسکرول افقی */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(#ffffff2f, #ffffff5b),
+    url("./public/chatbg.jpg") no-repeat center center fixed;
+  background-size: cover;
 }
 
 .chat-container {
-    width: 100%;
-    max-width: 600px;
-    height: 90vh;
-    border-radius: 15px;
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    overflow-x: hidden;
+  width: 100%;
+  max-width: 600px;
+  height: 98vh;
+  border-radius: 15px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto; /* فقط اسکرول عمودی */
+  overflow-x: hidden; /* حذف اسکرول افقی */
+  background: transparent;
+  scrollbar-width: thin; /* فایرفاکس */
+  scrollbar-color: #ffffff2f transparent; /* فایرفاکس */
 }
 
-/* پیام‌ها */
+/* استایل اسکرول برای کروم و بقیه */
+.chat-container::-webkit-scrollbar {
+  width: 6px;
+}
+.chat-container::-webkit-scrollbar-thumb {
+  background-color: #ffffff5b;
+  border-radius: 10px;
+}
+.chat-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+@media (max-width: 567px) {
+  .chat-container {
+    margin: 0 2px; /* فاصله فقط ۲ پیکسل از چپ و راست */
+    padding: 2px; /* padding داخلی هم کم کن */
+    height: 96vh;
+    border-radius: 10px;
+  }
+}
+
+/* دسکتاپ: ظاهر تمیز با بک‌گراند سفید */
+@media (min-width: 996px) {
+  .chat-container {
+    background: #effdde80;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+}
+
 .message {
-    max-width: 75%;
-    padding: 12px 18px;
-    margin: 8px 0;
-    border-radius: 18px;
-    line-height: 1.5;
-    font-size: 15px;
-    word-wrap: break-word;
-    position: relative;
-    display: inline-block;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 0.5s forwards;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  max-width: 75%;
+  padding: 12px 18px;
+  margin: 8px 0;
+  border-radius: 18px;
+  line-height: 1.5;
+  font-size: 15px;
+  word-wrap: break-word;
+  position: relative;
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.5s forwards;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .message-text {
   white-space: pre-line;
 }
 
-
 /* پیام من */
 .me {
-    background-color: #0084ff;
-    color: white;
-    align-self: flex-end;
-    text-align: right;
-    border-radius: 18px 18px 6px 18px;
-    padding-right: 18px;
+  background-color: #effdde;
+  align-self: flex-end;
+  text-align: right;
+  border-radius: 18px 18px 6px 18px;
+  padding-right: 18px;
 }
 
+.me::after,
+.other::after {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 0px;
+  border-top: 16px solid transparent;
+}
 /* نوک حباب من */
 .me::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    right: -16px;
-    width: 6px;
-    height: 0px;
-    border-left: 16px solid #0084ff;
-    border-top: 16px solid transparent;
+  bottom: 0;
+  right: -16px;
+  border-left: 16px solid #effdde;
 }
 
 /* پیام دیگر */
 .other {
-    background-color: #ffffff;
-    color: black;
-    align-self: flex-start;
-    text-align: right;
-    border-radius: 18px 18px 18px 6px;
-    padding-left: 18px;
+  background-color: #ffffff;
+  color: black;
+  align-self: flex-start;
+  text-align: right;
+  border-radius: 18px 18px 18px 6px;
+  padding-left: 18px;
 }
 
 /* نوک حباب دیگر */
 .other::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: -16px;
-    width: 6px;
-    height: 0px;
-    border-right: 16px solid #ffffff;
-    border-top: 16px solid transparent;
+  content: "";
+  position: absolute;
+  bottom: 0.5px;
+  left: -16px;
+  width: 6px;
+  height: 0px;
+  border-right: 16px solid #ffffff;
+  border-top: 16px solid transparent;
 }
 
 /* timestamp کم‌جا */
 .timestamp {
-    position: absolute;
-    bottom: 2px;
-    font-size: 10px;
-    opacity: 0.6;
-    z-index: 2;
-    opacity: 0.4;
+  position: absolute;
+  bottom: 2px;
+  font-size: 10px;
+  opacity: 0.6;
+  z-index: 2;
+  opacity: 0.4;
 }
 
 .me .timestamp {
-    right: 6px;
+  right: 6px;
 }
 
 .other .timestamp {
-    left: 6px;
+  left: 6px;
 }
 
 /* انیمیشن ورود پیام */
 @keyframes fadeInUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
