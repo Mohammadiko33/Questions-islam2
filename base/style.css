@@ -91,7 +91,7 @@ input {
   left: 50%;
   width: 80%;
   transform: translate(-50%, -50%);
-  color: yellow;
+  color: #fcde36;
   text-shadow: 1px 1px 1rem #333;
   font-size: 22px;
   font-weight: bold;
@@ -109,7 +109,7 @@ input {
 
 .like-btn,
 .dislike-btn {
-  background-color: #ffcc00;
+  background-color: #73ff00;
   border: none;
   padding: 8px 12px;
   border-radius: 5px;
@@ -120,7 +120,7 @@ input {
 }
 
 .like-btn:hover {
-  background-color: #ffdd33;
+  background-color: #47d803;
 }
 
 .dislike-btn {

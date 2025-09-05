@@ -51,6 +51,12 @@ const posts = [
     cover: "./why-did-muhammad-have-so-many-marriages/cover.png",
     link: "./why-did-muhammad-have-so-many-marriages/response.html",
   },
+  {
+    id: 2,
+    title: "صحبت درمورد حجاب در قرآن ",
+    link: "./islam-is-reqire/response.html",
+    cover: "./islam-is-reqire/cover.png"
+  },
 ];
 
 const container = document.querySelector(".container");
@@ -68,7 +74,7 @@ posts
     </a>
     <div class="actions">
       <button class="like-btn" onclick="likeItem(this)">لایک</button>
-      <button class="dislike-btn" onclick="dislikeItem(this)">دیس‌لایک</button>
+      <button class="dislike-btn" onclick="dislikeItem(this)">دیس‌لایک & ارسال بازخورد</button>
     </div>
   `;
     container.appendChild(item);
@@ -81,7 +87,7 @@ function dislikeItem(button) {
   const telegramMessage = `${getRandomGreeting()}  
 من پست «${postTitle}» شما رو 👎 دیس‌لایک کردم.  
 
-📌 دلیل من : `;
+📌 دلیل من اینکه : `;
 
   const telegramLink = document.createElement("a");
   telegramLink.target = "_blank";

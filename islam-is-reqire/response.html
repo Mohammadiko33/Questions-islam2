@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <title>چت با ملحد</title>
+    <link rel="stylesheet" href="../base/chats/chat.css">
+</head>
+<body>
+    <div class="chat-container" id="chat"></div>
+    <audio id="sendSound" src="../base/chats/public/get.mp3" controls style="display:none;"></audio>
+    <audio id="receiveSound" src="../base/chats/public/send.wav" controls style="display:none;"></audio>
+    <script src="../base/chats/chat.js"></script>
+    <script>
+        const messagesProject1 = [
+            {
+                sender: "other",
+                text: "سلام من یک سوال داشتم درمورد اسلام",
+                readTime: 1500
+            },
+            {
+                sender: "me",
+                text: "در خدمتدم بفرمایید ",
+                readTime: 1800
+            },
+            {
+                sender: "other",
+                text: `
+                یکی اینکه مگه اسلام ادعا نکرده لا اکراه فی الدین؟
+                پس چرا داره حجاب رو اجبار میکنه
+                `,
+                readTime: 4000
+            },
+            {
+                sender: "me",
+                text: `
+سوره احزاب آیه ۵۹ خیلی روشنه: 
+به زنای «مؤمن» گفته حجاب داشته باشن. 
+پس حکم فقط برای مسلمون‌هاست، نه همه. 
+«لا اکراه فی الدین» هم دقیقاً یعنی زور نمی‌شه کسی رو مسلمون کرد. 
+پس اجبار بیرونی هیچ منطقی نداره.
+  `,
+                readTime: 5000
+            },
+            {
+                sender: "other",
+                text: "ممنون از شما",
+                readTime: 1000
+            },
+            {
+                sender: "me",
+                text: "خواهش میکنم",
+                readTime: 1000
+            },
+        ];
+
+        initChat(messagesProject1);
+    </script>
+</body>
+</html>
