@@ -100,8 +100,8 @@ function setLocalItemStep({ watchHintId, steps }) {
     video.onended = () => {
       answer.classList.remove("hidden");
       answer.classList.add("reveal"); // انیمیشن
-      const storageKey = "videoWatched_" + step.videoId;
-      localStorage.setItem(storageKey, "true"); // کلید یونیک
+      const storageKey = video.dataset.key; // می‌گیره data-key از HTML
+      localStorage.setItem(storageKey, "true");
       currentStep++;
       if (currentStep < steps.length) {
         playStep(currentStep);
