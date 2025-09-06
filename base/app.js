@@ -63,6 +63,12 @@ const posts = [
     link: "./who-create-god/response.html",
     cover: "./who-create-god/cover.png",
   },
+  {
+    id: 5,
+    title: "خاورمیانه منطقه پیغمبر خیز و البته بدبختی خیز",
+    link: "./MiddleEast-is-home-prophet/response.html",
+    cover: "./MiddleEast-is-home-prophet/cover.png",
+  },
 ];
 
 const container = document.querySelector(".container");
