@@ -55,7 +55,13 @@ const posts = [
     id: 2,
     title: "صحبت درمورد حجاب در قرآن ",
     link: "./islam-is-reqire/response.html",
-    cover: "./islam-is-reqire/cover.png"
+    cover: "./islam-is-reqire/cover.png",
+  },
+  {
+    id: 3,
+    title: "اگه هر چیزی خالق داره ، خدا رو کی خلق کرده ؟",
+    link: "./who-create-god/response.html",
+    cover: "./who-create-god/cover.png",
   },
 ];
 
@@ -63,7 +69,7 @@ const container = document.querySelector(".container");
 posts
   .slice()
   .reverse()
-  .forEach(({link , cover , title}) => {
+  .forEach(({ link, cover, title }) => {
     const item = document.createElement("div");
     item.classList.add("item");
     item.innerHTML = `
