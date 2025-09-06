@@ -75,6 +75,12 @@ const posts = [
     link: "./MiddleEast-is-home-prophet/response.html",
     cover: "./MiddleEast-is-home-prophet/cover.png",
   },
+  {
+    id: 6,
+    title: "نماز نمیخونم ، به سالمندان کمک میکنم",
+    link: "./i-am-not-reading-namaz-becuase-im-help-old-women/response.html",
+    cover: "./i-am-not-reading-namaz-becuase-im-help-old-women/cover.png",
+  },
 ];
 
 const container = document.querySelector(".container");

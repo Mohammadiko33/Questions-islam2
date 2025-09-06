@@ -45,6 +45,7 @@
   margin: 0;
   padding: 0;
 }
+
 html,
 body {
   margin: 0;
@@ -293,7 +294,7 @@ a {
 }
 .btn--primary:hover,
 a:hover {
-  background: oklch(62.3% 0.214 259.815);
+  filter: brightness(0.8);
 }
 .btn--success {
   background: var(--green);
@@ -400,11 +401,11 @@ a:hover {
   column-gap: 0.5rem;
 }
 
-.mt-1{
+.mt-1 {
   margin-top: 1rem;
 }
 
-.text-xs{
+.text-xs {
   font-size: 12px;
 }
 

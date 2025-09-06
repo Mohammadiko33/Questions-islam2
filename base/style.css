@@ -1,21 +1,38 @@
 @font-face {
   font-family: "Vazir";
-  src: url("./Vazir.woff2") format("woff2");
+  src: url("./fonts/Vazir-Light-FD-WOL.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Vazir-bold";
+  src: url("./fonts/Vazir-Medium-FD-WOL.woff2") format("woff2");
+}
+
+:root {
+  --body: #f6f7fb;
+  --text: #ecfd00;
+  --green-btn: #dcfce7;
+  --green-btn-text: #00c950;
+  --red-btn: #ffe2e2;
+  --red-btn-text: #fb2c36;
 }
 
 body {
   font-family: "Vazir", Arial, sans-serif;
-  background-color: #f4f4f4;
+  background-color: var(--body);
   margin: 0;
   padding: 0;
   direction: rtl;
   text-align: right;
 }
 
-*,
+* {
+  font-family: "Vazir", Arial, sans-serif;
+}
+
 button,
 input {
-  font-family: "Vazir", Arial, sans-serif;
+  font-family: "Vazir-bold", Arial, sans-serif;
 }
 
 .title {
@@ -50,7 +67,7 @@ input {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
-.item:hover img{
+.item:hover img {
   filter: blur(1px);
 }
 
@@ -78,9 +95,9 @@ input {
   transform: translateY(-50%);
   background: radial-gradient(
     ellipse at center,
-    rgba(0,0,0,0.6) 0%,
-    rgba(0,0,0,0.3) 40%,
-    rgba(0,0,0,0) 100%
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0.3) 40%,
+    rgba(0, 0, 0, 0) 100%
   );
   pointer-events: none;
 }
@@ -91,7 +108,7 @@ input {
   left: 50%;
   width: 80%;
   transform: translate(-50%, -50%);
-  color: #fcde36;
+  color: var(--text);
   text-shadow: 1px 1px 1rem #333;
   font-size: 22px;
   font-weight: bold;
@@ -109,27 +126,32 @@ input {
 
 .like-btn,
 .dislike-btn {
-  background-color: #73ff00;
+  background-color: var(--green-btn);
+  color: var(--green-btn-text);
   border: none;
   padding: 8px 12px;
   border-radius: 5px;
   cursor: pointer;
   font-size: 14px;
-  color: #333;
-  transition: 0.2s;
-}
-
-.like-btn:hover {
-  background-color: #47d803;
+  transition: all 0.2s ease-in-out 0.02s;
+  box-shadow: 1px 1px 8px var(--green-btn);
 }
 
 .dislike-btn {
-  background-color: #ff6666;
-  color: white;
+  background-color: var(--red-btn);
+  color: var(--red-btn-text);
+  box-shadow: 1px 1px 8px var(--red-btn);
 }
 
+.like-btn:hover {
+  background-color: var(--green-btn-text);
+  color: var(--green-btn);
+  box-shadow: 1px 1px 8px var(--green-btn-text);
+}
 .dislike-btn:hover {
-  background-color: #ff4444;
+  background-color: var(--red-btn-text);
+  color: var(--red-btn);
+  box-shadow: 1px 1px 8px var(--red-btn-text);
 }
 
 /* ریسپانسیو */
