@@ -396,8 +396,16 @@ a:hover {
   display: flex;
 }
 
-.gap-x-2 {
+.gap-x-05 {
   column-gap: 0.5rem;
+}
+
+.mt-1{
+  margin-top: 1rem;
+}
+
+.text-xs{
+  font-size: 12px;
 }
 
 /* لپ‌تاپ‌های کوچک */
