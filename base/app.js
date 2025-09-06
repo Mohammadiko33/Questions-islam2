@@ -64,6 +64,12 @@ const posts = [
     cover: "./who-create-god/cover.png",
   },
   {
+    id: 4,
+    title: "قرآن سخن کیست ؟ ، محمد یا الله ؟",
+    link: "./who-wrriting-quran-muhammad-of-allah/response.html",
+    cover: "./who-wrriting-quran-muhammad-of-allah/cover.png",
+  },
+  {
     id: 5,
     title: "خاورمیانه منطقه پیغمبر خیز و البته بدبختی خیز",
     link: "./MiddleEast-is-home-prophet/response.html",

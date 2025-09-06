@@ -55,18 +55,21 @@ function setLocalItemStep({ watchHintId, steps }) {
 
   // اگر قبلا دیده شده، از localStorage
   steps.forEach((s, idx) => {
-    const watched = localStorage.getItem(s.videoId) === "true";
+    const watched =
+      localStorage.getItem("videoWatched_" + s.videoId) === "true";
     if (watched) {
       document.getElementById(s.answerId).classList.remove("hidden");
       document
         .getElementById(s.videoId)
-        .parentElement.parentElement.classList.remove("hidden");
+        .closest(".section")
+        .classList.remove("hidden");
       currentStep = idx + 1;
     } else {
       if (idx !== currentStep) {
         document
           .getElementById(s.videoId)
-          .parentElement.parentElement.classList.add("hidden");
+          .closest(".section")
+          .classList.add("hidden");
         document.getElementById(s.answerId).classList.add("hidden");
       }
     }
@@ -88,14 +91,17 @@ function setLocalItemStep({ watchHintId, steps }) {
     const step = steps[idx];
     const video = document.getElementById(step.videoId);
     const answer = document.getElementById(step.answerId);
+    const section = video.closest(".section"); // نمایش کل بخش
 
-    video.parentElement.parentElement.classList.remove("hidden");
+    section.classList.remove("hidden");
     video.currentTime = 0;
     answer.classList.add("hidden");
 
     video.onended = () => {
       answer.classList.remove("hidden");
-      localStorage.setItem(step.videoId, "true"); // ذخیره وضعیت در localStorage
+      answer.classList.add("reveal"); // انیمیشن
+      const storageKey = "videoWatched_" + step.videoId;
+      localStorage.setItem(storageKey, "true"); // کلید یونیک
       currentStep++;
       if (currentStep < steps.length) {
         playStep(currentStep);
