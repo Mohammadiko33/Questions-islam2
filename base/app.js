@@ -81,6 +81,12 @@ const posts = [
     link: "./i-am-not-reading-namaz-becuase-im-help-old-women/response.html",
     cover: "./i-am-not-reading-namaz-becuase-im-help-old-women/cover.png",
   },
+  {
+    id: 7,
+    title: "صحبت درمورد قلب و مغز در قرآن",
+    link: "./heart-or-brain-chat/response.html",
+    cover: "./heart-or-brain-chat/cover.jpg",
+  },
 ];
 
 const container = document.querySelector(".container");
