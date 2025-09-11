@@ -87,6 +87,12 @@ const posts = [
     link: "./heart-or-brain-chat/response.html",
     cover: "./heart-or-brain-chat/cover.jpg",
   },
+  {
+    id: 8,
+    title: "رستم یا نوح ؟ قهرمانان شاهنامه یا قران ؟",
+    link: "./real-superhiro-quran-or-shahnameh/response.html",
+    cover: "./real-superhiro-quran-or-shahnameh/cover.jpg",
+  },
 ];
 
 const container = document.querySelector(".container");
