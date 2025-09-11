@@ -100,10 +100,16 @@ const posts = [
     cover: "./just-one-quran-or-not/cover.jpg",
   },
   {
-    id: 9,
+    id: 10,
     title: "هیچ انسان سالمی با خواندن قرآن مسلمان نمیشه",
     link: "./no-iman-with-read-quran/response.html",
     cover: "./no-iman-with-read-quran/cover.jpg",
+  },
+  {
+    id: 11,
+    title: "قلب مرکز تفکره ؟ اشتباه علمی قرآن",
+    link: "./heart-or-brain-verse-quran/response.html",
+    cover: "./heart-or-brain-verse-quran/cover.jpg",
   },
 ];
 
