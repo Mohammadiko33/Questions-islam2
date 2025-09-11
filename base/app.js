@@ -99,6 +99,12 @@ const posts = [
     link: "./just-one-quran-or-not/response.html",
     cover: "./just-one-quran-or-not/cover.jpg",
   },
+  {
+    id: 9,
+    title: "هیچ انسان سالمی با خواندن قرآن مسلمان نمیشه",
+    link: "./no-iman-with-read-quran/response.html",
+    cover: "./no-iman-with-read-quran/cover.jpg",
+  },
 ];
 
 const container = document.querySelector(".container");
