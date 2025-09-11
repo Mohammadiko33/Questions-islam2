@@ -89,9 +89,15 @@ const posts = [
   },
   {
     id: 8,
-    title: "رستم یا نوح ؟ قهرمانان شاهنامه یا قران ؟",
+    title: "رستم یا نوح ؟ قهرمانان شاهنامه یا قرآن ؟",
     link: "./real-superhiro-quran-or-shahnameh/response.html",
     cover: "./real-superhiro-quran-or-shahnameh/cover.jpg",
+  },
+  {
+    id: 9,
+    title: "اشتباه قرآن ، اول آسمان رو خلق کرده یا زمین را",
+    link: "./quran-verse-create-sky-and-earth/response.html",
+    cover: "./quran-verse-create-sky-and-earth/cover.jpg",
   },
 ];
 
