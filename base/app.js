@@ -95,9 +95,9 @@ const posts = [
   },
   {
     id: 9,
-    title: "اشتباه قرآن ، اول آسمان رو خلق کرده یا زمین را",
-    link: "./quran-verse-create-sky-and-earth/response.html",
-    cover: "./quran-verse-create-sky-and-earth/cover.jpg",
+    title: "در دنیا قرآن های مختلفی وجود داره",
+    link: "./just-one-quran-or-not/response.html",
+    cover: "./just-one-quran-or-not/cover.jpg",
   },
 ];
 

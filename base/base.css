@@ -117,12 +117,11 @@ h2 {
 h3 {
   font-size: clamp(1.1rem, 2vw, 1.4rem);
 }
-h4,
-h5,
-h6 {
-  font-size: 1rem;
+h4{
+  font-size: 19px;
 }
 p {
+  font-size: 17px;
   margin: 0.75rem 0;
   color: var(--text);
 }
@@ -221,14 +220,22 @@ p {
 /* -------------------------------
    تصاویر
 --------------------------------*/
+
 .img-block {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* ۴ ستون مساوی */
+  gap: 12px;
   margin: 14px auto;
-  text-align: center;
+  max-width: 1040px; /* همون عرض کانتینر */
 }
-.img-block img {
-  width: 100%;
-  max-width: min(70%, 720px);
+
+.img-block img,
+.image-inside {
+  width: 100%; /* هر تصویر ستون خودش رو پر می‌کنه */
+  max-height: 360px;
+  object-fit: contain;
   border-radius: 12px;
+  background: #fff;
   box-shadow: 0 8px 24px var(--shadow-8);
   border: 1px solid var(--gray-border);
 }
@@ -339,57 +346,6 @@ a:hover {
 /* -------------------------------
    واکنش‌گرا
 --------------------------------*/
-/* موبایل کوچک (خیلی ریز) */
-@media (max-width: 480px) {
-  body {
-    font-size: 14px;
-  }
-  .container {
-    padding: 12px 10px 32px;
-  }
-  .page-title {
-    font-size: 1.2rem;
-  }
-  .card {
-    padding: 12px;
-    border-radius: 12px;
-  }
-}
-
-/* موبایل و تبلت */
-@media (max-width: 768px) {
-  .container {
-    padding: 16px 14px 48px;
-  }
-  .img-block img {
-    max-width: 88%;
-  }
-  .watch-hint {
-    grid-template-columns: 20px 1fr;
-  }
-  .card {
-    padding: 16px;
-  }
-}
-
-/* تصاویر */
-.img-block {
-  display: flex; /* چینش افقی */
-  flex-wrap: wrap; /* اگر جا کم شد، به خط بعدی میره */
-  gap: 12px; /* فاصله بین تصاویر */
-  justify-content: center; /* وسط چین کردن */
-  margin: 14px auto;
-}
-
-.img-block img {
-  width: 100%; /* حداکثر عرض کانتینر */
-  max-width: 300px; /* محدود کردن حداکثر عرض هر تصویر */
-  height: auto; /* ارتفاع متناسب */
-  border-radius: 12px;
-  box-shadow: 0 8px 24px var(--shadow-8);
-  border: 1px solid var(--gray-border);
-  object-fit: contain; /* جلوگیری از کشیده شدن */
-}
 
 /* helper class */
 
@@ -409,8 +365,21 @@ a:hover {
   font-size: 12px;
 }
 
-/* لپ‌تاپ‌های کوچک */
+/* مانیتورهای خیلی بزرگ */
+
+/* دسکتاپ معمولی */
+@media (max-width: 1280px) {
+  .container {
+    max-width: 994px;
+  }
+}
+
+/* تبلت */
 @media (max-width: 1024px) {
+  .img-block {
+    grid-template-columns: repeat(2, 1fr); /* ۲ ستون */
+  }
+
   .container {
     max-width: 768px;
   }
@@ -422,14 +391,47 @@ a:hover {
   }
 }
 
-/* دسکتاپ معمولی */
-@media (max-width: 1280px) {
+@media (max-width: 768px) {
   .container {
-    max-width: 994px;
+    padding: 16px 14px 48px;
+  }
+  .img-block img,
+  .image-inside {
+    max-width: 88%;
+  }
+  .watch-hint {
+    grid-template-columns: 20px 1fr;
+  }
+  .card {
+    padding: 16px;
   }
 }
 
-/* مانیتورهای خیلی بزرگ */
+/* موبایل */
+@media (max-width: 480px) {
+  .img-block {
+    grid-template-columns: 1fr; /* ۱ ستون */
+    justify-items: center;
+  }
+
+  body {
+    font-size: 14px;
+  }
+
+  .container {
+    padding: 12px 10px 32px;
+  }
+
+  .page-title {
+    font-size: 1.2rem;
+  }
+
+  .card {
+    padding: 12px;
+    border-radius: 12px;
+  }
+}
+
 @media (min-width: 1600px) {
   .container {
     max-width: 1080px;
