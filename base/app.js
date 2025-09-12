@@ -101,7 +101,7 @@ const posts = [
   },
   {
     id: 10,
-    title: "هیچ انسان سالمی با خواندن قرآن مسلمان نمیشه",
+    title: "هیچ انسان سالمی با خواندن قرآن مسلمان نمی‌شود",
     link: "./no-iman-with-read-quran/response.html",
     cover: "./no-iman-with-read-quran/cover.jpg",
   },
@@ -110,6 +110,12 @@ const posts = [
     title: "قلب مرکز تفکره ؟ اشتباه علمی قرآن",
     link: "./heart-or-brain-verse-quran/response.html",
     cover: "./heart-or-brain-verse-quran/cover.jpg",
+  },
+  {
+    id: 12,
+    title: "خود آدم باعقلش میتونه به چیزایی که در قرآن وجود داره برسه",
+    link: "./empty-quran/response.html",
+    cover: "./empty-quran/cover.jpg",
   },
 ];
 
