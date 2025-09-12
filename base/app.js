@@ -117,6 +117,12 @@ const posts = [
     link: "./empty-quran/response.html",
     cover: "./empty-quran/cover.jpg",
   },
+  {
+    id: 13,
+    title: "رابطه زن مسلمان با 72 مرد بهشتی",
+    link: "./the-72-virgins-of-paradise/response.html",
+    cover: "./the-72-virgins-of-paradise/cover.jpg",
+  },
 ];
 
 const container = document.querySelector(".container");
