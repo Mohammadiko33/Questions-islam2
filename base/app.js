@@ -123,6 +123,12 @@ const posts = [
     link: "./the-72-virgins-of-paradise/response.html",
     cover: "./the-72-virgins-of-paradise/cover.jpg",
   },
+  {
+    id: 14,
+    title: "مکالمه درمورد اینکه قران ساخته دست بشره",
+    link: "./quran-create-by-human/response.html",
+    cover: "./quran-create-by-human/cover.jpg",
+  },
 ];
 
 const container = document.querySelector(".container");
