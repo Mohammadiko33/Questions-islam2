@@ -131,7 +131,7 @@ const posts = [
   },
   {
     id: 15,
-    title: "",
+    title: "هیچ قرآنی توی قرن اول اسلام نبوده",
     link: "./quran-after-200year-islam/response.html",
     cover: "./quran-after-200year-islam/cover.png",
   },
