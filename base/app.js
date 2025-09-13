@@ -135,6 +135,12 @@ const posts = [
     link: "./quran-after-200year-islam/response.html",
     cover: "./quran-after-200year-islam/cover.png",
   },
+  {
+    id: 16,
+    title: "مسلمانان بت پرستند ، چون دارن مکه رو میپرستن",
+    link: "./is-it-maccae-god/response.html",
+    cover: "./is-it-maccae-god/cover.png",
+  },
 ];
 
 const container = document.querySelector(".container");
