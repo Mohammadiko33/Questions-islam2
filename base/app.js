@@ -129,6 +129,12 @@ const posts = [
     link: "./quran-create-by-human/response.html",
     cover: "./quran-create-by-human/cover.jpg",
   },
+  {
+    id: 15,
+    title: "",
+    link: "./quran-after-200year-islam/response.html",
+    cover: "./quran-after-200year-islam/cover.png",
+  },
 ];
 
 const container = document.querySelector(".container");

@@ -59,6 +59,11 @@ body {
   background: var(--body);
   color: var(--text);
 }
+
+img {
+  border-radius: .75rem;
+}
+
 img,
 video {
   max-width: 100%;
@@ -141,6 +146,7 @@ p {
    کارت
 --------------------------------*/
 .card {
+  width: 100%;
   background: var(--background);
   border-radius: 16px;
   padding: clamp(16px, 2.2vw, 28px);
@@ -148,14 +154,21 @@ p {
   border: 1px solid var(--gray-border);
   margin-top: 18px;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
+  overflow: hidden; /* محتوای داخل هم گرد بشه */
 }
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px var(--shadow-8);
+
+.card video {
+  width: 100%;        /* عرض کامل کانتینر */
+  height: auto;       /* تناسب تصویر */
+  display: block;     
+  border-radius: 16px; /* 👈 گوشه‌های ویدیو هم گرد */
 }
+
 .card--claim {
   border-right: 6px solid var(--red);
 }
+
+
 .card--answer {
   border-right: 6px solid var(--green);
 }
