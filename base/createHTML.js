@@ -1,6 +1,56 @@
 import fs from "fs";
 import path from "path";
 
+function addPostToAppJs({ videoId, titleHTML }) {
+  const appPath = path.resolve("./base/app.js");
+  if (!fs.existsSync(appPath)) {
+    console.warn("⚠️ فایل app.js پیدا نشد:", appPath);
+    return;
+  }
+
+  let content = fs.readFileSync(appPath, "utf-8");
+
+  // پیدا کردن آرایه posts
+  const postsMatch = content.match(/const posts = \[(.*?)\];/s);
+  if (!postsMatch) {
+    console.warn("⚠️ آرایه posts پیدا نشد در app.js");
+    return;
+  }
+
+  let postsContent = postsMatch[1].trim();
+
+  // پیدا کردن آخرین id
+  const ids = [...postsContent.matchAll(/id:\s*(\d+)/g)].map((m) =>
+    parseInt(m[1], 10)
+  );
+  const lastId = ids.length ? Math.max(...ids) : 0;
+  const newId = lastId + 1;
+
+  // ساخت آیتم جدید
+  const newPost = `
+  {
+    id: ${newId},
+    title: "${titleHTML}",
+    link: "./${videoId}/response.html",
+    cover: "./${videoId}/cover.png"
+  }`;
+
+  // اضافه کردن به آخر آرایه قبل از ]
+  if (postsContent.endsWith(",")) {
+    postsContent += newPost + ",";
+  } else {
+    postsContent += "," + newPost;
+  }
+
+  const newContent = content.replace(
+    /const posts = \[.*?\];/s,
+    `const posts = [${postsContent}\n];`
+  );
+
+  fs.writeFileSync(appPath, newContent, "utf-8");
+  console.log("✅ پست جدید به app.js اضافه شد:", newId, titleHTML);
+}
+
 function generateHtml({
   mode = "normal",
   path: fileName = "README.md",
@@ -159,6 +209,10 @@ function generateHtml({
     const outPath = path.join(outputDir, "response.html");
     fs.writeFileSync(outPath, html, "utf-8");
     console.log("✅ فایل normal ساخته شد:", outPath);
+
+    // ← این خط اضافه کن
+    addPostToAppJs({ videoId, titleHTML: pageTitle });
+
     return;
   }
 
@@ -254,7 +308,9 @@ function generateHtml({
 
     const outPath = path.join(outputDir, "response.html");
     fs.writeFileSync(outPath, html, "utf-8");
-    console.log("✅ فایل videoStepbyStep ساخته شد:", outPath);
+    console.log("✅ فایل normal ساخته شد:", outPath);
+    // ← این خط اضافه کن
+    addPostToAppJs({ videoId, titleHTML: pageTitle });
     return;
   }
 }
