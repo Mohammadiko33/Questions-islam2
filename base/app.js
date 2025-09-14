@@ -131,12 +131,18 @@ const posts = [
   },
   {
     id: 15,
+    title: "ارتش اسـ*رائیـل با اخلاق ترین ارتش جهانه",
+    link: "./ghaze/response.html",
+    cover: "./ghaze/cover.png",
+  },
+  {
+    id: 16,
     title: "هیچ قرآنی توی قرن اول اسلام نبوده",
     link: "./quran-after-200year-islam/response.html",
     cover: "./quran-after-200year-islam/cover.png",
   },
   {
-    id: 16,
+    id: 17,
     title: "مسلمانان بت پرستند ، چون دارن مکه رو میپرستن",
     link: "./is-it-maccae-god/response.html",
     cover: "./is-it-maccae-god/cover.png",
