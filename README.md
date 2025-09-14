@@ -28,3 +28,15 @@
 
 ## 📬 ارتباط
 برای مطرح کردن پرسش‌ها و پیشنهادها می‌توانید از بخش **Issues** در همین مخزن استفاده کنید.
+
+--- 
+
+<!-- 
+
+3 Step for make new project
+
+1 : create folder with name in root
+2 : create and put README.md inside folder
+3 : run command **npm run dev**
+
+ -->

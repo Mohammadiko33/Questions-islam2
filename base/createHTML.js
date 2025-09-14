@@ -51,7 +51,7 @@ function addPostToAppJs({ videoId, titleHTML }) {
   console.log("✅ پست جدید به app.js اضافه شد:", newId, titleHTML);
 }
 
-function generateHtml({
+export default function generateHtml({
   mode = "normal",
   path: fileName = "README.md",
   videoId,
@@ -314,14 +314,3 @@ function generateHtml({
     return;
   }
 }
-
-generateHtml({
-  mode: "normal",
-  titleHTML: "test project",
-  videoId: "no-idam-hva",
-  extraBoxContent: "lorem ipsum",
-  titleHTML: "lorem ipsum",
-});
-
-// node ./base/createHTML.js
-// need file readme.md : root > [videoId] > README.md
