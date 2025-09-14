@@ -149,6 +149,46 @@ body {
   left: 6px;
 }
 
+/* عکس داخل پیام */
+.message img {
+  max-width: 100%;
+  max-height: 300px;
+  border-radius: 10px;
+  display: block;
+  margin: 5px 0;
+  object-fit: cover;
+  cursor: pointer;
+  padding: 6px; /* پدینگ برای فاصله از حاشیه */
+  background: #fff; /* پس‌زمینه روشن برای عکس */
+}
+
+/* اگر پیام فقط عکس بود، ظاهر مرتب‌تر */
+.message:has(img) {
+  padding: 0;            /* حباب بدون padding */
+  background: transparent;
+  box-shadow: none;
+  position: relative;
+}
+
+.message.me:has(img) {
+  align-self: flex-end;
+}
+
+.message:has(img)::after {
+  display: none !important;
+}
+.message.other:has(img) {
+  align-self: flex-start;
+}
+
+/* جلوگیری از اورفلو */
+.chat-container img {
+  max-width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+
 /* انیمیشن ورود پیام */
 @keyframes fadeInUp {
   to {

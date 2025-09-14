@@ -53,23 +53,18 @@ function setLocalItemStep({ watchHintId, steps }) {
   const hint = document.getElementById(watchHintId);
   let currentStep = 0;
 
-  // اگر قبلا دیده شده، از localStorage
+  // چک وضعیت ذخیره شده
   steps.forEach((s, idx) => {
-    const watched =
-      localStorage.getItem("videoWatched_" + s.videoId) === "true";
+    const storageKey = "videoWatched_" + s.videoId;
+    const watched = localStorage.getItem(storageKey) === "true";
+
     if (watched) {
       document.getElementById(s.answerId).classList.remove("hidden");
-      document
-        .getElementById(s.videoId)
-        .closest(".section")
-        .classList.remove("hidden");
+      document.getElementById(s.videoId).closest(".section").classList.remove("hidden");
       currentStep = idx + 1;
     } else {
       if (idx !== currentStep) {
-        document
-          .getElementById(s.videoId)
-          .closest(".section")
-          .classList.add("hidden");
+        document.getElementById(s.videoId).closest(".section").classList.add("hidden");
         document.getElementById(s.answerId).classList.add("hidden");
       }
     }
@@ -91,7 +86,7 @@ function setLocalItemStep({ watchHintId, steps }) {
     const step = steps[idx];
     const video = document.getElementById(step.videoId);
     const answer = document.getElementById(step.answerId);
-    const section = video.closest(".section"); // نمایش کل بخش
+    const section = video.closest(".section");
 
     section.classList.remove("hidden");
     video.currentTime = 0;
@@ -99,9 +94,12 @@ function setLocalItemStep({ watchHintId, steps }) {
 
     video.onended = () => {
       answer.classList.remove("hidden");
-      answer.classList.add("reveal"); // انیمیشن
-      const storageKey = video.dataset.key; // می‌گیره data-key از HTML
+      answer.classList.add("reveal");
+
+      // کلید واحد (فقط همین خط تغییر کرده)
+      const storageKey = "videoWatched_" + step.videoId;
       localStorage.setItem(storageKey, "true");
+
       currentStep++;
       if (currentStep < steps.length) {
         playStep(currentStep);
