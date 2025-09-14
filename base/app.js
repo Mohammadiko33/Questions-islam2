@@ -143,6 +143,12 @@ const posts = [
   },
   {
     id: 17,
+    title: "مراحل شکل گیری جنین درقرآن کپی برداری ازجالینوسه",
+    link: "./quran-is-copy-paste-arasto/response.html",
+    cover: "./quran-is-copy-paste-arasto/cover.jpg",
+  },
+  {
+    id: 18,
     title: "مسلمانان بت پرستند ، چون دارن مکه رو میپرستن",
     link: "./is-it-maccae-god/response.html",
     cover: "./is-it-maccae-god/cover.png",
