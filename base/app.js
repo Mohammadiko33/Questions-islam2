@@ -153,6 +153,12 @@ const posts = [
     link: "./is-it-maccae-god/response.html",
     cover: "./is-it-maccae-god/cover.png",
   },
+  {
+    id: 18,
+    title: "چرا خدایی که میدونه من جهنمیم منو خلق میکنه",
+    link: "./why-allah-create-me/response.html",
+    cover: "./why-allah-create-me/cover.jpg",
+  },
 ];
 
 const container = document.querySelector(".container");

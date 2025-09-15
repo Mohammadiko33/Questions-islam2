@@ -58,7 +58,7 @@ export default function generateHtml({
   extraBoxContent = "",
   titleHTML,
 }) {
-  const rootDir = path.resolve("./"); // rootproject
+  const rootDir = path.resolve(`./${videoId}/`); // rootproject
 
   // مسیر ورودی
   let inputDir = rootDir;
@@ -126,6 +126,7 @@ export default function generateHtml({
     const outPath = path.join(rootDir, "response.html");
     fs.writeFileSync(outPath, html, "utf-8");
     console.log("✅ فایل chat ساخته شد:", outPath);
+    fs.unlinkSync(absPath);
     return;
   }
 
@@ -209,6 +210,7 @@ export default function generateHtml({
     const outPath = path.join(outputDir, "response.html");
     fs.writeFileSync(outPath, html, "utf-8");
     console.log("✅ فایل normal ساخته شد:", outPath);
+    fs.unlinkSync(absPath);
 
     // ← این خط اضافه کن
     addPostToAppJs({ videoId, titleHTML: pageTitle });
@@ -309,6 +311,7 @@ export default function generateHtml({
     const outPath = path.join(outputDir, "response.html");
     fs.writeFileSync(outPath, html, "utf-8");
     console.log("✅ فایل normal ساخته شد:", outPath);
+    fs.unlinkSync(absPath);
     // ← این خط اضافه کن
     addPostToAppJs({ videoId, titleHTML: pageTitle });
     return;
