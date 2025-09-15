@@ -17,7 +17,7 @@ function initChat(messages) {
                 msgDiv.innerHTML = message.text;
             } else {
                 // اگر متن بود
-                msgDiv.textContent = message.text;
+                msgDiv.innerHTML = message.text;
             }
 
             // تایم‌استمپ رو فقط برای متن‌ها نشون بده
@@ -57,7 +57,7 @@ function addMessage(message) {
         if (message.text.trim().startsWith("<img")) {
             msgDiv.innerHTML = message.text;
         } else {
-            msgDiv.textContent = message.text;
+            msgDiv.innerHTML = message.text;
 
             const timeDiv = document.createElement("span");
             timeDiv.classList.add("timestamp");
