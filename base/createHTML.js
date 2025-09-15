@@ -48,7 +48,7 @@ function addPostToAppJs({ videoId, titleHTML }) {
   );
 
   fs.writeFileSync(appPath, newContent, "utf-8");
-  console.log("✅ پست جدید به app.js اضافه شد:", newId, titleHTML);
+  console.log("✅ new post add to base/app.js successfully", newId, titleHTML);
 }
 
 export default function generateHtml({
@@ -62,12 +62,12 @@ export default function generateHtml({
 
   // مسیر ورودی
   let inputDir = rootDir;
-  if (mode === "normal" || mode === "videoStepbyStep") {
+  if (mode.toLowerCase() === "normal" || mode.toLowerCase() === "videostepbystep") {
     if (!videoId) throw new Error("❌ videoId اجباری هست در این حالت");
     inputDir = path.join(rootDir, videoId);
   }
 
-  const absPath = path.join(`${inputDir}/${videoId}`, fileName);
+  const absPath = path.join(inputDir, fileName);
   if (!fs.existsSync(absPath)) {
     throw new Error(`❌ فایل پیدا نشد: ${absPath}`);
   }
@@ -75,7 +75,7 @@ export default function generateHtml({
 
   // مسیر خروجی
   let outputDir = rootDir;
-  if (mode === "normal" || mode === "videoStepbyStep") {
+  if (mode.toLowerCase() === "normal" || mode.toLowerCase() === "videostepbystep") {
     outputDir = path.join(rootDir, videoId);
     if (!fs.existsSync(outputDir)) {
       fs.mkdirSync(outputDir, { recursive: true });
@@ -87,7 +87,7 @@ export default function generateHtml({
   }
 
   // ------------------ حالت chat ------------------
-  if (mode === "chat") {
+  if (mode.toLowerCase() === "chat") {
     const lines = mdContent.split("\n").filter((line) => line.trim() !== "");
     const messages = lines.map((line) => {
       const [senderRaw, ...textParts] = line.split(":");
@@ -125,7 +125,7 @@ export default function generateHtml({
 
   const outPath = path.join(rootDir, `${videoId}/response.html`);
   fs.writeFileSync(outPath, html, "utf-8");
-  console.log("✅ فایل chat ساخته شد:", outPath);
+  console.log("✅ html chat created , address : ", outPath);
 
   // پاک کردن README.md
   const deleteReadme = path.join(rootDir, videoId);
@@ -138,7 +138,7 @@ export default function generateHtml({
   }
 
   // ------------------ حالت normal ------------------
-  if (mode === "normal") {
+  if (mode.toLowerCase() === "normal") {
     if (!videoId) throw new Error("❌ videoId اجباری هست در حالت normal");
 
     const lines = mdContent.split("\n").filter((line) => line.trim() !== "");
@@ -216,7 +216,7 @@ export default function generateHtml({
 
     const outPath = path.join(outputDir, "response.html");
     fs.writeFileSync(outPath, html, "utf-8");
-    console.log("✅ فایل normal ساخته شد:", outPath);
+    console.log("✅ html template created in address :", outPath);
     fs.unlinkSync(absPath);
 
     // ← این خط اضافه کن
@@ -225,8 +225,8 @@ export default function generateHtml({
     return;
   }
 
-  // ------------------ حالت videoStepbyStep ------------------
-  if (mode === "videoStepbyStep") {
+  // ------------------ حالت videostepbystep ------------------
+  if (mode.toLowerCase() === "videostepbystep") {
     const parts = mdContent.split(/^# ادعا/m).slice(1);
     const steps = [];
 
@@ -317,7 +317,7 @@ export default function generateHtml({
 
     const outPath = path.join(outputDir, "response.html");
     fs.writeFileSync(outPath, html, "utf-8");
-    console.log("✅ فایل normal ساخته شد:", outPath);
+    console.log("✅ html multiply video created in address :", outPath);
     fs.unlinkSync(absPath);
     // ← این خط اضافه کن
     addPostToAppJs({ videoId, titleHTML: pageTitle });
