@@ -58,7 +58,7 @@ export default function generateHtml({
   extraBoxContent = "",
   titleHTML,
 }) {
-  const rootDir = path.resolve(`./${videoId}/`); // rootproject
+  const rootDir = path.resolve(`./`); // rootproject
 
   // مسیر ورودی
   let inputDir = rootDir;
@@ -123,7 +123,7 @@ export default function generateHtml({
 </body>
 </html>`;
 
-    const outPath = path.join(rootDir, "response.html");
+    const outPath = path.join(rootDir, `${videoId}/response.html`);
     fs.writeFileSync(outPath, html, "utf-8");
     console.log("✅ فایل chat ساخته شد:", outPath);
     fs.unlinkSync(absPath);

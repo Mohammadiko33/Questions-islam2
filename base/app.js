@@ -44,8 +44,7 @@ function getRandomGreeting() {
   return greetings[Math.floor(Math.random() * greetings.length)];
 }
 
-const posts = [
-  {
+const posts = [{
     id: 1,
     title: "چرا حضرت محمد این تعداد ازدواج داشته",
     cover: "./why-did-muhammad-have-so-many-marriages/cover.png",
@@ -158,6 +157,12 @@ const posts = [
     title: "چرا خدایی که میدونه من جهنمیم منو خلق میکنه",
     link: "./why-allah-create-me/response.html",
     cover: "./why-allah-create-me/cover.jpg",
+  },
+  {
+    id: 19,
+    title: "صحبت انسان با مورچه",
+    link: "./human-talk-ant/response.html",
+    cover: "./human-talk-ant/cover.png"
   },
 ];
 
