@@ -67,7 +67,7 @@ export default function generateHtml({
     inputDir = path.join(rootDir, videoId);
   }
 
-  const absPath = path.join(inputDir, fileName);
+  const absPath = path.join(`${inputDir}/${videoId}`, fileName);
   if (!fs.existsSync(absPath)) {
     throw new Error(`❌ فایل پیدا نشد: ${absPath}`);
   }
@@ -123,11 +123,18 @@ export default function generateHtml({
 </body>
 </html>`;
 
-    const outPath = path.join(rootDir, `${videoId}/response.html`);
-    fs.writeFileSync(outPath, html, "utf-8");
-    console.log("✅ فایل chat ساخته شد:", outPath);
-    fs.unlinkSync(absPath);
-    return;
+  const outPath = path.join(rootDir, `${videoId}/response.html`);
+  fs.writeFileSync(outPath, html, "utf-8");
+  console.log("✅ فایل chat ساخته شد:", outPath);
+
+  // پاک کردن README.md
+  const deleteReadme = path.join(rootDir, videoId);
+  fs.unlinkSync(`${deleteReadme}/README.md`);
+
+  // 👇 این خط رو اضافه کن
+  addPostToAppJs({ videoId, titleHTML: titleHTML || videoId });
+
+  return;
   }
 
   // ------------------ حالت normal ------------------
