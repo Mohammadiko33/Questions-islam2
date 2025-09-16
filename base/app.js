@@ -188,6 +188,12 @@ const posts = [{
     link: "./islam-created-slavery/response.html",
     cover: "./islam-created-slavery/cover.jpg"
   },
+  {
+    id: 24,
+    title: "آیا در اسلام ارتباط با زن شوهر دار درسته ؟",
+    link: "./marrying-a-married-woman/response.html",
+    cover: "./marrying-a-married-woman/cover.jpg"
+  },
 ];
 
 const container = document.querySelector(".container");
