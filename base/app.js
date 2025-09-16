@@ -186,7 +186,7 @@ const posts = [{
     id: 23,
     title: "اسلام مروج برده داری بود",
     link: "./islam-created-slavery/response.html",
-    cover: "./islam-created-slavery/cover.png"
+    cover: "./islam-created-slavery/cover.jpg"
   },
 ];
 
