@@ -51,6 +51,59 @@ function addPostToAppJs({ videoId, titleHTML }) {
   console.log("✅ new post add to base/app.js successfully", newId, titleHTML);
 }
 
+function convertLinesToHtml(lines) {
+  const result = [];
+  let insideDiv = false;
+  let divBuffer = [];
+
+  for (const rawLine of lines) {
+    const line = rawLine.trim();
+    if (!line) continue;
+
+    // شروع بلاک div
+    if (line.startsWith("<div")) {
+      insideDiv = true;
+      divBuffer.push(line);
+      continue;
+    }
+
+    // داخل بلاک div
+    if (insideDiv) {
+      divBuffer.push(line);
+      if (line.endsWith("</div>")) {
+        result.push(divBuffer.join("\n"));
+        divBuffer = [];
+        insideDiv = false;
+      }
+      continue;
+    }
+
+    // heading h4
+    if (line.startsWith("####")) {
+      result.push(`<h4>${line.replace(/^####\s*/, "")}</h4>`);
+      continue;
+    }
+
+    // heading h3
+    if (line.startsWith("###")) {
+      result.push(`<h3>${line.replace(/^###\s*/, "")}</h3>`);
+      continue;
+    }
+
+    // عکس تکی
+    if (line.startsWith("<img")) {
+      result.push(line);
+      continue;
+    }
+
+    // متن بولد
+    const withStrong = line.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+    result.push(`<p>${withStrong}</p>`);
+  }
+
+  return result.join("\n");
+}
+
 export default function generateHtml({
   mode = "normal",
   path: fileName = "README.md",
@@ -62,7 +115,10 @@ export default function generateHtml({
 
   // مسیر ورودی
   let inputDir = rootDir;
-  if (mode.toLowerCase() === "normal" || mode.toLowerCase() === "videostepbystep") {
+  if (
+    mode.toLowerCase() === "normal" ||
+    mode.toLowerCase() === "videostepbystep"
+  ) {
     if (!videoId) throw new Error("❌ videoId اجباری هست در این حالت");
     inputDir = path.join(rootDir, videoId);
   }
@@ -75,7 +131,10 @@ export default function generateHtml({
 
   // مسیر خروجی
   let outputDir = rootDir;
-  if (mode.toLowerCase() === "normal" || mode.toLowerCase() === "videostepbystep") {
+  if (
+    mode.toLowerCase() === "normal" ||
+    mode.toLowerCase() === "videostepbystep"
+  ) {
     outputDir = path.join(rootDir, videoId);
     if (!fs.existsSync(outputDir)) {
       fs.mkdirSync(outputDir, { recursive: true });
@@ -123,18 +182,18 @@ export default function generateHtml({
 </body>
 </html>`;
 
-  const outPath = path.join(rootDir, `${videoId}/response.html`);
-  fs.writeFileSync(outPath, html, "utf-8");
-  console.log("✅ html chat created , address : ", outPath);
+    const outPath = path.join(rootDir, `${videoId}/response.html`);
+    fs.writeFileSync(outPath, html, "utf-8");
+    console.log("✅ html chat created , address : ", outPath);
 
-  // پاک کردن README.md
-  const deleteReadme = path.join(rootDir, videoId);
-  fs.unlinkSync(`${deleteReadme}/README.md`);
+    // پاک کردن README.md
+    const deleteReadme = path.join(rootDir, videoId);
+    fs.unlinkSync(`${deleteReadme}/README.md`);
 
-  // 👇 این خط رو اضافه کن
-  addPostToAppJs({ videoId, titleHTML: titleHTML || videoId });
+    // 👇 این خط رو اضافه کن
+    addPostToAppJs({ videoId, titleHTML: titleHTML || videoId });
 
-  return;
+    return;
   }
 
   // ------------------ حالت normal ------------------
@@ -142,22 +201,7 @@ export default function generateHtml({
     if (!videoId) throw new Error("❌ videoId اجباری هست در حالت normal");
 
     const lines = mdContent.split("\n").filter((line) => line.trim() !== "");
-    const bodyContent = lines
-      .map((line) => {
-        const trimmed = line.trim();
-        if (trimmed.startsWith("####"))
-          return `<h4>${trimmed.replace(/^####\s*/, "")}</h4>`;
-        if (trimmed.startsWith("###"))
-          return `<h3>${trimmed.replace(/^###\s*/, "")}</h3>`;
-        if (trimmed.startsWith("<img") || trimmed.startsWith("<div"))
-          return trimmed;
-        const withStrong = trimmed.replace(
-          /\*\*(.*?)\*\*/g,
-          "<strong>$1</strong>"
-        );
-        return `<p>${withStrong}</p>`;
-      })
-      .join("\n");
+    const bodyContent = convertLinesToHtml(lines);
 
     const extraHtml = extraBoxContent
       ? `<div id="extraBox" class="extra-box hidden mt-2">
@@ -230,54 +274,44 @@ export default function generateHtml({
     const parts = mdContent.split(/^# ادعا/m).slice(1);
     const steps = [];
 
-    const sectionsHtml = parts
-      .map((block, idx) => {
-        const number = idx + 1;
-        const lines = block.split("\n").filter((l) => l.trim() !== "");
-        const claimVideoLine = lines.find((l) => l.includes("<video"));
-        const claimVideo = claimVideoLine
-          ? claimVideoLine.replace(
-              /<video(.*?)>/,
-              `<video id="claim${number}" data-key="claim--part${number}"$1>`
-            )
-          : "";
+const sectionsHtml = parts
+  .map((block, idx) => {
+    const number = idx + 1;
+    const lines = block.split("\n").filter((l) => l.trim() !== "");
 
-        const answerIdx = lines.findIndex((l) => l.startsWith("# جواب"));
-        const answerContentLines = lines.slice(answerIdx + 1);
-        const answerContent = answerContentLines
-          .map((line) => {
-            const trimmed = line.trim();
-            if (trimmed.startsWith("####"))
-              return `<h4>${trimmed.replace(/^####\s*/, "")}</h4>`;
-            if (trimmed.startsWith("###"))
-              return `<h3>${trimmed.replace(/^###\s*/, "")}</h3>`;
-            if (trimmed.startsWith("<img") || trimmed.startsWith("<div"))
-              return trimmed;
-            const withStrong = trimmed.replace(
-              /\*\*(.*?)\*\*/g,
-              "<strong>$1</strong>"
-            );
-            return `<p>${withStrong}</p>`;
-          })
-          .join("\n");
+    // 🎬 ویدیو ادعا
+    const claimVideoLine = lines.find((l) => l.includes("<video"));
+    const claimVideo = claimVideoLine
+      ? claimVideoLine.replace(
+          /<video(.*?)>/,
+          `<video id="claim${number}" data-key="claim--part${number}"$1>`
+        )
+      : "";
 
-        steps.push({ videoId: `claim${number}`, answerId: `answer${number}` });
+    // 💡 جواب
+    const answerIdx = lines.findIndex((l) => l.startsWith("# جواب"));
+    const answerContentLines = answerIdx >= 0 ? lines.slice(answerIdx + 1) : [];
+    const answerContent = convertLinesToHtml(answerContentLines);
 
-        return `
-      <!-- ========== بخش ${number} ========== -->
-      <div id="section${number}" class="section ${number > 1 ? "hidden" : ""}">
-        <div class="card card--claim">
-          <h2># ادعا ${number}</h2>
-          <div class="video-wrapper">${claimVideo}</div>
+    steps.push({ videoId: `claim${number}`, answerId: `answer${number}` });
+
+    return `
+    <!-- ========== بخش ${number} ========== -->
+    <div id="section${number}" class="section ${number > 1 ? "hidden" : ""}">
+      <div class="card card--claim">
+        <h2>ادعا ${number}</h2>
+        <div class="video-wrapper">
+          ${claimVideo}
         </div>
+      </div>
 
-        <div id="answer${number}" class="card card--answer hidden">
-          <h2># جواب ${number}</h2>
-          ${answerContent}
-        </div>
-      </div>`;
-      })
-      .join("\n");
+      <div id="answer${number}" class="card card--answer hidden">
+        <h2>جواب ${number}</h2>
+        ${answerContent}
+      </div>
+    </div>`;
+  })
+  .join("\n");
 
     const extraHtml = extraBoxContent
       ? `<div id="extraBox" class="extra-box hidden">
@@ -310,7 +344,7 @@ export default function generateHtml({
   <script src="../base/base.js"></script>
   <script>
     const steps = ${JSON.stringify(steps, null, 2)};
-    setLocalItemStep({ watchHintId: "hint", steps });
+    setLocalItemStep({ watchHintId: "hint", videoId: "${videoId}", steps });
   </script>
 </body>
 </html>`;

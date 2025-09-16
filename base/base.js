@@ -49,37 +49,40 @@ function setLocalItem({
   });
 }
 
-function setLocalItemStep({ watchHintId, steps }) {
+function setLocalItemStep({ watchHintId, videoId, steps }) {
   const hint = document.getElementById(watchHintId);
   let currentStep = 0;
 
-  // چک وضعیت ذخیره شده
+  // چک وضعیت ذخیره‌شده
   steps.forEach((s, idx) => {
-    const storageKey = "videoWatched_" + s.videoId;
+    const storageKey = `video_${videoId}_part${idx + 1}`;
     const watched = localStorage.getItem(storageKey) === "true";
 
+    const video = document.getElementById(s.videoId);
+    const answer = document.getElementById(s.answerId);
+
     if (watched) {
-      document.getElementById(s.answerId).classList.remove("hidden");
-      document.getElementById(s.videoId).closest(".section").classList.remove("hidden");
+      answer.classList.remove("hidden");
+      video.closest(".section").classList.remove("hidden");
       currentStep = idx + 1;
     } else {
       if (idx !== currentStep) {
-        document.getElementById(s.videoId).closest(".section").classList.add("hidden");
-        document.getElementById(s.answerId).classList.add("hidden");
+        video.closest(".section").classList.add("hidden");
+        answer.classList.add("hidden");
       }
     }
   });
 
   if (currentStep >= steps.length) {
     hint.style.display = "none";
-    document.getElementById("extraBox").classList.remove("hidden");
+    document.getElementById("extraBox")?.classList.remove("hidden");
     return;
   }
 
   function playStep(idx) {
     if (idx >= steps.length) {
       hint.style.display = "none";
-      document.getElementById("extraBox").classList.remove("hidden");
+      document.getElementById("extraBox")?.classList.remove("hidden");
       return;
     }
 
@@ -92,12 +95,12 @@ function setLocalItemStep({ watchHintId, steps }) {
     video.currentTime = 0;
     answer.classList.add("hidden");
 
+    const storageKey = `video_${videoId}_part${idx + 1}`;
+
     video.onended = () => {
       answer.classList.remove("hidden");
       answer.classList.add("reveal");
 
-      // کلید واحد (فقط همین خط تغییر کرده)
-      const storageKey = "videoWatched_" + step.videoId;
       localStorage.setItem(storageKey, "true");
 
       currentStep++;
@@ -105,7 +108,7 @@ function setLocalItemStep({ watchHintId, steps }) {
         playStep(currentStep);
       } else {
         hint.style.display = "none";
-        document.getElementById("extraBox").classList.remove("hidden");
+        document.getElementById("extraBox")?.classList.remove("hidden");
       }
     };
   }
