@@ -168,19 +168,19 @@ const posts = [{
     id: 20,
     title: "اسلام من یا اسلام عربستان",
     link: "./islam-iran-or-arabstan/response.html",
-    cover: "./islam-iran-or-arabstan/cover.png"
+    cover: "./islam-iran-or-arabstan/cover.jpg"
   },
   {
     id: 21,
     title: "مثال های کشکی قرآن",
     link: "./Muhammad-talk-about-fly/response.html",
-    cover: "./Muhammad-talk-about-fly/cover.png"
+    cover: "./Muhammad-talk-about-fly/cover.jpg"
   },
   {
     id: 22,
     title: "سوتی های قرآن زیر زره بین علم",
     link: "./scientific-review-of-quran-verse/response.html",
-    cover: "./scientific-review-of-quran-verse/cover.png"
+    cover: "./scientific-review-of-quran-verse/cover.jpg"
   },
 ];
 
