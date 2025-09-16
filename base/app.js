@@ -182,6 +182,12 @@ const posts = [{
     link: "./scientific-review-of-quran-verse/response.html",
     cover: "./scientific-review-of-quran-verse/cover.jpg"
   },
+  {
+    id: 23,
+    title: "اسلام مروج برده داری بود",
+    link: "./islam-created-slavery/response.html",
+    cover: "./islam-created-slavery/cover.png"
+  },
 ];
 
 const container = document.querySelector(".container");

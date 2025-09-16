@@ -111,10 +111,23 @@ export default function generateHtml({
   extraBoxContent = "",
   titleHTML,
 }) {
-  const rootDir = path.resolve(`./`); // rootproject
+  const rootDir = path.resolve("./"); // مسیر روت پروژه
+
+  // مسیر ورودی بر اساس videoId
+  if (!videoId) {
+    throw new Error("❌ videoId اجباری هست");
+  }
+
+  const inputDir = path.join(rootDir, videoId);
+  const absPath = path.join(inputDir, fileName);
+
+  if (!fs.existsSync(absPath)) {
+    throw new Error(`❌ فایل پیدا نشد: ${absPath}`);
+  }
+  const mdContent = fs.readFileSync(absPath, "utf-8");
+
 
   // مسیر ورودی
-  let inputDir = rootDir;
   if (
     mode.toLowerCase() === "normal" ||
     mode.toLowerCase() === "videostepbystep"
@@ -123,11 +136,9 @@ export default function generateHtml({
     inputDir = path.join(rootDir, videoId);
   }
 
-  const absPath = path.join(inputDir, fileName);
   if (!fs.existsSync(absPath)) {
     throw new Error(`❌ فایل پیدا نشد: ${absPath}`);
   }
-  const mdContent = fs.readFileSync(absPath, "utf-8");
 
   // مسیر خروجی
   let outputDir = rootDir;
@@ -147,20 +158,19 @@ export default function generateHtml({
 
   // ------------------ حالت chat ------------------
   if (mode.toLowerCase() === "chat") {
-    const lines = mdContent.split("\n").filter((line) => line.trim() !== "");
-    const messages = lines.map((line) => {
-      const [senderRaw, ...textParts] = line.split(":");
-      const sender = senderRaw.trim().toLowerCase();
-      const text = textParts.join(":").trim();
+  const lines = mdContent.split("\n").filter((line) => line.trim() !== "");
+  const messages = lines.map((line) => {
+    const [senderRaw, ...textParts] = line.split(":");
+    const sender = senderRaw.trim().toLowerCase();
+    const text = textParts.join(":").trim();
+    const wordCount = text.split(/\s+/).filter(Boolean).length;
+      const readTime = wordCount * 250;
 
-      const wordCount = text.split(/\s+/).filter(Boolean).length;
-      const readTime = wordCount * 300;
-
-      return {
-        sender,
-        text: text.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>"),
-        readTime,
-      };
+    return {
+      sender,
+      text: text.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>"),
+      readTime,
+    };
     });
 
     const html = `<!DOCTYPE html>
@@ -182,17 +192,19 @@ export default function generateHtml({
 </body>
 </html>`;
 
-    const outPath = path.join(rootDir, `${videoId}/response.html`);
+    const outputDir = path.join(rootDir, videoId);
+    if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir, { recursive: true });
+
+    const outPath = path.join(outputDir, "response.html");
     fs.writeFileSync(outPath, html, "utf-8");
     console.log("✅ html chat created , address : ", outPath);
 
-    // پاک کردن README.md
-    const deleteReadme = path.join(rootDir, videoId);
-    fs.unlinkSync(`${deleteReadme}/README.md`);
+    // پاک کردن README.md فقط در مسیر videoId
+    const readmePath = path.join(outputDir, "README.md");
+    if (fs.existsSync(readmePath)) fs.unlinkSync(readmePath);
 
-    // 👇 این خط رو اضافه کن
+    // اضافه کردن به app.js
     addPostToAppJs({ videoId, titleHTML: titleHTML || videoId });
-
     return;
   }
 
@@ -274,28 +286,29 @@ export default function generateHtml({
     const parts = mdContent.split(/^# ادعا/m).slice(1);
     const steps = [];
 
-const sectionsHtml = parts
-  .map((block, idx) => {
-    const number = idx + 1;
-    const lines = block.split("\n").filter((l) => l.trim() !== "");
+    const sectionsHtml = parts
+      .map((block, idx) => {
+        const number = idx + 1;
+        const lines = block.split("\n").filter((l) => l.trim() !== "");
 
-    // 🎬 ویدیو ادعا
-    const claimVideoLine = lines.find((l) => l.includes("<video"));
-    const claimVideo = claimVideoLine
-      ? claimVideoLine.replace(
-          /<video(.*?)>/,
-          `<video id="claim${number}" data-key="claim--part${number}"$1>`
-        )
-      : "";
+        // 🎬 ویدیو ادعا
+        const claimVideoLine = lines.find((l) => l.includes("<video"));
+        const claimVideo = claimVideoLine
+          ? claimVideoLine.replace(
+              /<video(.*?)>/,
+              `<video id="claim${number}" data-key="claim--part${number}"$1>`
+            )
+          : "";
 
-    // 💡 جواب
-    const answerIdx = lines.findIndex((l) => l.startsWith("# جواب"));
-    const answerContentLines = answerIdx >= 0 ? lines.slice(answerIdx + 1) : [];
-    const answerContent = convertLinesToHtml(answerContentLines);
+        // 💡 جواب
+        const answerIdx = lines.findIndex((l) => l.startsWith("# جواب"));
+        const answerContentLines =
+          answerIdx >= 0 ? lines.slice(answerIdx + 1) : [];
+        const answerContent = convertLinesToHtml(answerContentLines);
 
-    steps.push({ videoId: `claim${number}`, answerId: `answer${number}` });
+        steps.push({ videoId: `claim${number}`, answerId: `answer${number}` });
 
-    return `
+        return `
     <!-- ========== بخش ${number} ========== -->
     <div id="section${number}" class="section ${number > 1 ? "hidden" : ""}">
       <div class="card card--claim">
@@ -310,8 +323,8 @@ const sectionsHtml = parts
         ${answerContent}
       </div>
     </div>`;
-  })
-  .join("\n");
+      })
+      .join("\n");
 
     const extraHtml = extraBoxContent
       ? `<div id="extraBox" class="extra-box hidden">
