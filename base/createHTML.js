@@ -32,7 +32,7 @@ function addPostToAppJs({ videoId, titleHTML }) {
     id: ${newId},
     title: "${titleHTML}",
     link: "./${videoId}/response.html",
-    cover: "./${videoId}/cover.png"
+    cover: "./${videoId}/cover.jpg"
   }`;
 
   // اضافه کردن به آخر آرایه قبل از ]
@@ -55,10 +55,22 @@ function convertLinesToHtml(lines) {
   const result = [];
   let insideDiv = false;
   let divBuffer = [];
+  let skipUntilAnswer = false;
 
   for (const rawLine of lines) {
-    const line = rawLine.trim();
+    let line = rawLine.trim();
     if (!line) continue;
+
+    // اگر هنوز به # پاسخ نرسیدیم، همه چیز قبلش را رد کن
+    if (line.startsWith("# ادعا")) {
+      skipUntilAnswer = true;
+      continue;
+    }
+    if (skipUntilAnswer && line.startsWith("# پاسخ")) {
+      skipUntilAnswer = false;
+      continue;
+    }
+    if (skipUntilAnswer) continue;
 
     // شروع بلاک div
     if (line.startsWith("<div")) {
@@ -96,6 +108,9 @@ function convertLinesToHtml(lines) {
       continue;
     }
 
+    // ویدیو تگ داخل جواب قرار نگیرد
+    if (line.startsWith("<video")) continue;
+
     // متن بولد
     const withStrong = line.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
     result.push(`<p>${withStrong}</p>`);
@@ -103,6 +118,7 @@ function convertLinesToHtml(lines) {
 
   return result.join("\n");
 }
+
 
 export default function generateHtml({
   mode = "normal",
@@ -118,7 +134,7 @@ export default function generateHtml({
     throw new Error("❌ videoId اجباری هست");
   }
 
-  const inputDir = path.join(rootDir, videoId);
+  let inputDir = path.join(rootDir, videoId);
   const absPath = path.join(inputDir, fileName);
 
   if (!fs.existsSync(absPath)) {

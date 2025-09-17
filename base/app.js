@@ -194,6 +194,12 @@ const posts = [{
     link: "./marrying-a-married-woman/response.html",
     cover: "./marrying-a-married-woman/cover.jpg"
   },
+  {
+    id: 25,
+    title: "ازدواج پیامبر با همسر پسر خوانده اش",
+    link: "./Muhammad-marriage-to-his-adopted-son/response.html",
+    cover: "./Muhammad-marriage-to-his-adopted-son/cover.jpg"
+  },
 ];
 
 const container = document.querySelector(".container");
