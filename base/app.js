@@ -178,7 +178,7 @@ const posts = [{
   },
   {
     id: 22,
-    title: "سوتی های قرآن زیر زره بین علم",
+    title: "سوتی های قرآن زیر ذره‌بین علم",
     link: "./scientific-review-of-quran-verse/response.html",
     cover: "./scientific-review-of-quran-verse/cover.jpg"
   },
