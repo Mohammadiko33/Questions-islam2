@@ -204,7 +204,7 @@ const posts = [{
     id: 26,
     title: "گاف بزرگ قرآن ، زمین تخته",
     link: "./flat-earth-in-quran/response.html",
-    cover: "./flat-earth-in-quran/cover.jpg"
+    cover: "./flat-earth-in-quran/evidence/9.jpg"
   },
 ];
 
