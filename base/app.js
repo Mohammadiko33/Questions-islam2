@@ -200,6 +200,12 @@ const posts = [{
     link: "./Muhammad-marriage-to-his-adopted-son/response.html",
     cover: "./Muhammad-marriage-to-his-adopted-son/cover.jpg"
   },
+  {
+    id: 26,
+    title: "گاف بزرگ قرآن ، زمین تخته",
+    link: "./flat-earth-in-quran/response.html",
+    cover: "./flat-earth-in-quran/cover.jpg"
+  },
 ];
 
 const container = document.querySelector(".container");
