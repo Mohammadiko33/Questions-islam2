@@ -53,24 +53,22 @@ function addPostToAppJs({ videoId, titleHTML }) {
 
 function convertLinesToHtml(lines) {
   const result = [];
+  let inAnswer = false;
   let insideDiv = false;
   let divBuffer = [];
-  let skipUntilAnswer = false;
 
   for (const rawLine of lines) {
-    let line = rawLine.trim();
+    const line = rawLine.trim();
     if (!line) continue;
 
-    // اگر هنوز به # پاسخ نرسیدیم، همه چیز قبلش را رد کن
-    if (line.startsWith("# ادعا")) {
-      skipUntilAnswer = true;
+    // شروع بخش جواب
+    if (line.startsWith("# جواب")) {
+      inAnswer = true;
       continue;
     }
-    if (skipUntilAnswer && line.startsWith("# پاسخ")) {
-      skipUntilAnswer = false;
-      continue;
-    }
-    if (skipUntilAnswer) continue;
+
+    // قبل از رسیدن به جواب را نادیده بگیر
+    if (!inAnswer) continue;
 
     // شروع بلاک div
     if (line.startsWith("<div")) {
@@ -108,9 +106,6 @@ function convertLinesToHtml(lines) {
       continue;
     }
 
-    // ویدیو تگ داخل جواب قرار نگیرد
-    if (line.startsWith("<video")) continue;
-
     // متن بولد
     const withStrong = line.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
     result.push(`<p>${withStrong}</p>`);
@@ -118,6 +113,7 @@ function convertLinesToHtml(lines) {
 
   return result.join("\n");
 }
+
 
 
 export default function generateHtml({
