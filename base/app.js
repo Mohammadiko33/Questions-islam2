@@ -206,6 +206,12 @@ const posts = [{
     link: "./flat-earth-in-quran/response.html",
     cover: "./flat-earth-in-quran/evidence/9.jpg"
   },
+  {
+    id: 27,
+    title: "قوانین ضد انسانی اسلام",
+    link: "./mortad-sangsar/response.html",
+    cover: "./mortad-sangsar/cover.jpg"
+  },
 ];
 
 const container = document.querySelector(".container");
