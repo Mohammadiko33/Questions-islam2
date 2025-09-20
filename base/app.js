@@ -213,17 +213,17 @@ const posts = [{
     cover: "./mortad-sangsar/cover.jpg"
   },
   {
-    id: 28,
-    title: "اشتباه بزرگ قرآن درباره غروب خورشید",
-    link: "./sun-in-sea/response.html",
-    cover: "./sun-in-sea/cover.jpg"
-  },
-  {
     id: 29,
     title: "سوتی قرآن بارش تگرگ از کوه ها",
     link: "./quran-verse-tagarg/response.html",
     cover: "./quran-verse-tagarg/cover.jpg"
   },
+  // {
+  //   id: 35,
+  //   title: "اشتباه بزرگ قرآن درباره غروب خورشید",
+  //   link: "./sun-in-sea/response.html",
+  //   cover: "./sun-in-sea/cover.jpg"
+  // },
 ];
 
 const container = document.querySelector(".container");
